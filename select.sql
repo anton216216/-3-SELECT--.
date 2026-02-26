@@ -1,6 +1,6 @@
--- =============================================
+
 -- PART 1: Basic SELECT queries
--- =============================================
+
 
 -- 1. Title and duration of the longest track
 SELECT title, duration
@@ -44,24 +44,9 @@ WHERE
     OR title ILIKE '% tu %'
 ORDER BY title;
 
--- Alternative solution #1: Using string_to_array and array intersection (&&)
--- This is more elegant and easily scalable for multiple words
-SELECT title
-FROM tracks
-WHERE 
-    string_to_array(LOWER(title), ' ') && ARRAY['my', 'tu']
-ORDER BY title;
-
--- Alternative solution #2: Using regular expressions (~*)
--- Word boundary with \y ensures we match whole words only
-SELECT title
-FROM tracks
-WHERE 
-    title ~* '\ymy\y' OR title ~* '\ytu\y'
-ORDER BY title;
 
 
-
+-- PART 2: JOIN queries
 -- 1. Number of artists in each genre
 SELECT g.name AS genre, COUNT(ag.artist_id) AS artist_count
 FROM genres g
